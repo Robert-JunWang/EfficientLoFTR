@@ -144,7 +144,7 @@ class PL_LoFTR(pl.LightningModule):
                 self.logger.experiment.add_scalar(f'train/{k}', v, self.global_step)
 
             # figures
-            if self.config.TRAINER.ENABLE_PLOTTING:
+            if False: #self.config.TRAINER.ENABLE_PLOTTING:
                 compute_symmetrical_epipolar_errors(batch)  # compute epi_errs for each match
                 figures = make_matching_figures(batch, self.config, self.config.TRAINER.PLOT_MODE)
                 for k, v in figures.items():

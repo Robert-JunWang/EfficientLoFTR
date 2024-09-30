@@ -17,7 +17,8 @@ ckpt_path="weights/eloftr_outdoor.ckpt"
 
 dump_dir="dump/eloftr_full_megadepth"
 data_cfg_path="configs/data/megadepth_test_1500.py"
-size="1152"
+#size="1152"
+size="512"
 python ./test.py \
     ${data_cfg_path} \
     ${main_cfg_path} \
