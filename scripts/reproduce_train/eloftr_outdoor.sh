@@ -8,10 +8,10 @@ export PYTHONPATH=$PROJECT_DIR:$PYTHONPATH
 cd $PROJECT_DIR
 
 # to reproduced the results in our paper, please use:
-TRAIN_IMG_SIZE=832
+TRAIN_IMG_SIZE=512
 
 n_nodes=1
-n_gpus_per_node=4
+n_gpus_per_node=1
 torch_num_workers=4
 batch_size=5
 pin_memory=true
@@ -34,7 +34,7 @@ python -u ./train.py \
     --limit_val_batches=1. \
     --num_sanity_val_steps=10 \
     --benchmark=True \
-    --max_epochs=30 \
+    --max_epochs=20 \
     --thr 0.1 \
     --disable_mp \
     --deter

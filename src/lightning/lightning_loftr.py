@@ -60,7 +60,7 @@ class PL_LoFTR(pl.LightningModule):
 
         # Pretrained weights
         if pretrained_ckpt:
-            state_dict = torch.load(pretrained_ckpt, map_location='cpu')['state_dict']
+            state_dict = torch.load(pretrained_ckpt, map_location='cpu', weights_only=False)['state_dict']
             msg=self.matcher.load_state_dict(state_dict, strict=False)
             logger.info(f"Load \'{pretrained_ckpt}\' as pretrained checkpoint")
         
@@ -144,7 +144,7 @@ class PL_LoFTR(pl.LightningModule):
                 self.logger.experiment.add_scalar(f'train/{k}', v, self.global_step)
 
             # figures
-            if False: #self.config.TRAINER.ENABLE_PLOTTING:
+            if self.config.TRAINER.ENABLE_PLOTTING:
                 compute_symmetrical_epipolar_errors(batch)  # compute epi_errs for each match
                 figures = make_matching_figures(batch, self.config, self.config.TRAINER.PLOT_MODE)
                 for k, v in figures.items():
@@ -186,7 +186,7 @@ class PL_LoFTR(pl.LightningModule):
         for valset_idx, outputs in enumerate(multi_outputs):
             # since pl performs sanity_check at the very begining of the training
             cur_epoch = self.trainer.current_epoch
-            if not self.trainer.resume_from_checkpoint and self.trainer.running_sanity_check:
+            if not self.trainer.resume_from_checkpoint and self.trainer._run_sanity_check:
                 cur_epoch = -1
 
             # 1. loss_scalars: dict of list, on cpu

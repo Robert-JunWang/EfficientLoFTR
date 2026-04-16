@@ -135,7 +135,7 @@ def main():
         args,
         plugins=[DDPPlugin(find_unused_parameters=False,
                           num_nodes=args.num_nodes,
-                          sync_batchnorm=config.TRAINER.WORLD_SIZE > 0), NativeMixedPrecisionPlugin()],
+                          sync_batchnorm=config.TRAINER.WORLD_SIZE > 0)],
         gradient_clip_val=config.TRAINER.GRADIENT_CLIPPING,
         callbacks=callbacks,
         logger=logger,
