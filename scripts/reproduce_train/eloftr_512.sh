@@ -11,7 +11,7 @@ cd $PROJECT_DIR
 TRAIN_IMG_SIZE=512
 
 n_nodes=1
-n_gpus_per_node=3
+n_gpus_per_node=1
 torch_num_workers=4
 batch_size=6
 pin_memory=true
